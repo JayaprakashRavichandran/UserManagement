@@ -17,12 +17,29 @@ class AddressModel extends CI_Model
 
     /**
      * @param array $data
+     */
+    public function delete($data)
+    {
+        $this->db->delete(self::DB_TB_ADDRESS, $data);
+    }
+
+    /**
+     * @param array $data
+     * @param int $userId
+     */
+    public function update($data, $userId)
+    {
+        $this->db->update(self::DB_TB_ADDRESS, $data, array('USER_ID' => $userId));
+    }
+
+    /**
+     * @param array $data
      * @return mixed
      */
     public function save($data)
     {
-        $dbQuery = $this->db->insert(self::DB_TB_ADDRESS, $data);
+       $this->db->insert(self::DB_TB_ADDRESS, $data);
 
-        return $dbQuery->insert_id();
+        return $this->db->insert_id();
     }
 }
